@@ -233,10 +233,25 @@
         display: none;
       }
 
-      /* SAAT DIPILIH */
+      /* DEFAULT (LIGHT MODE) */
       .option-group input[type="radio"]:checked + span {
-        color: #1f2937;
+        color: #111827; /* hitam */
         font-weight: 600;
+      }
+
+      /* DARK MODE */
+      body.dark .option-group input[type="radio"]:checked + span {
+        color: #ffffff; /* putih */
+      }
+
+      /* LIGHT */
+      .option-group label:has(input:checked) {
+        background: #fff7ed;
+      }
+
+      /* DARK */
+      body.dark .option-group label:has(input:checked) {
+        background: #78350f;
       }
 
       .option-group input[type="radio"]:checked + span::before {
