@@ -204,25 +204,21 @@
         color: white;
       }
 
-      /* RADIO */
+      /* RAPIIIN ALIGN RADIO */
       .option-group {
         display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      /* RADIO LEBIH RAPI TANPA UBAH HTML */
-      .option-group {
-        display: flex;
-        flex-wrap: wrap;
+        flex-direction: column; /* bikin turun ke bawah biar rata kiri */
+        align-items: flex-start;
         gap: 10px;
       }
 
       .option-group label {
         display: flex;
         align-items: center;
-        gap: 6px;
-        padding: 8px 12px;
+        justify-content: flex-start;
+        gap: 10px;
+        width: 100%; /* biar full width rapi */
+        padding: 10px 12px;
         border-radius: 8px;
         border: 1px solid #ddd;
         cursor: pointer;
@@ -234,11 +230,11 @@
         border-color: var(--gold);
       }
 
-      /* Perbaiki posisi radio */
+      /* Radio tetap rapi */
       .option-group input[type="radio"] {
-        accent-color: var(--gold); /* modern browser */
+        accent-color: var(--gold);
         transform: scale(1.2);
-        cursor: pointer;
+        margin: 0;
       }
 
       /* DARK MODE */
