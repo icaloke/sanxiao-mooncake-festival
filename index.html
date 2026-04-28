@@ -538,6 +538,11 @@
             <label>Nama Saudara</label>
             <input type="text" id="namaSaudara" />
           </div>
+
+          <div id="pasanganSection" class="hidden">
+            <label>Nama Suami / Istri</label>
+            <input type="text" id="namaPasangan" />
+          </div>
         </div>
 
         <div class="section">
@@ -588,7 +593,13 @@
       document.querySelectorAll('input[name="hadir"]').forEach((el) => {
         el.addEventListener("change", () => {
           let val = document.querySelector('input[name="hadir"]:checked').value;
+
+          // SAUDARA
           document.getElementById("saudaraSection").classList.toggle("hidden", val !== "Saudara");
+
+          // SUAMI / ISTRI
+          document.getElementById("pasanganSection").classList.toggle("hidden", !(val === "Suami" || val === "Istri"));
+
           hitungTotal();
         });
       });
@@ -609,6 +620,7 @@
         let kodepos = document.getElementById("kodepos").value;
         let jumlah = document.getElementById("jumlahSaudara").value;
         let namaSaudara = document.getElementById("namaSaudara").value;
+        let namaPasangan = document.getElementById("namaPasangan").value;
 
         let total = biaya;
         if (hadir === "Suami" || hadir === "Istri") total += biaya;
@@ -616,7 +628,20 @@
 
         await fetch("URL_GOOGLE_SCRIPT_KAMU", {
           method: "POST",
-          body: JSON.stringify({ nama, mandarin, jk, status, hadir, hp, kota, kodepos, jumlah, namaSaudara, total }),
+          body: JSON.stringify({
+            nama,
+            mandarin,
+            jk,
+            status,
+            hadir,
+            hp,
+            kota,
+            kodepos,
+            jumlah,
+            namaSaudara,
+            namaPasangan,
+            total,
+          }),
         });
 
         let pesan = encodeURIComponent(
@@ -634,6 +659,7 @@ HP: ${hp}
 Hadir: ${hadir}
 Jumlah: ${jumlah}
 Nama Saudara: ${namaSaudara}
+Nama Pasangan: ${namaPasangan}
 
 Total: Rp ${total.toLocaleString("id-ID")}`,
         );
