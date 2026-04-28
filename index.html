@@ -204,25 +204,23 @@
         color: white;
       }
 
-      /* RAPIIIN ALIGN RADIO */
+      /* OPTION JADI BUTTON */
       .option-group {
         display: flex;
-        flex-direction: column; /* bikin turun ke bawah biar rata kiri */
-        align-items: flex-start;
+        flex-direction: column;
         gap: 10px;
       }
 
       .option-group label {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 10px;
-        width: 100%; /* biar full width rapi */
-        padding: 10px 12px;
-        border-radius: 8px;
+        display: block;
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
         border: 1px solid #ddd;
         cursor: pointer;
         background: #f9fafb;
+        font-weight: 500;
+        text-align: left;
       }
 
       /* Hover */
@@ -230,11 +228,41 @@
         border-color: var(--gold);
       }
 
-      /* Radio tetap rapi */
+      /* HIDE RADIO */
       .option-group input[type="radio"] {
-        accent-color: var(--gold);
-        transform: scale(1.2);
-        margin: 0;
+        display: none;
+      }
+
+      /* SAAT DIPILIH */
+      .option-group input[type="radio"]:checked + span {
+        color: #1f2937;
+        font-weight: 600;
+      }
+
+      .option-group input[type="radio"]:checked + span::before {
+        content: "✔ ";
+        color: var(--gold);
+      }
+
+      /* BACKGROUND AKTIF */
+      .option-group input[type="radio"]:checked + span {
+        display: block;
+      }
+
+      .option-group label:has(input:checked) {
+        background: #fff7ed;
+        border-color: var(--gold);
+      }
+
+      /* DARK MODE */
+      body.dark .option-group label {
+        background: #334155;
+        border: 1px solid #475569;
+      }
+
+      body.dark .option-group label:has(input:checked) {
+        background: #78350f;
+        border-color: var(--gold-dark);
       }
 
       /* DARK MODE */
@@ -418,8 +446,16 @@
 
           <label>Jenis Kelamin</label>
           <div class="option-group">
-            <label><input type="radio" name="jk" value="Laki-laki" checked /> Laki-laki</label>
-            <label><input type="radio" name="jk" value="Perempuan" /> Perempuan</label>
+            <!-- <label><input type="radio" name="jk" value="Laki-laki" checked /> Laki-laki</label>
+            <label><input type="radio" name="jk" value="Perempuan" /> Perempuan</label> -->
+            <label>
+              <input type="radio" name="jk" value="Laki-laki" checked />
+              <span>Laki-laki</span>
+            </label>
+            <label>
+              <input type="radio" name="jk" value="Perempuan" />
+              <span>Perempuan</span>
+            </label>
           </div>
 
           <label>Alamat</label>
