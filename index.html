@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mooncake Festival Registration</title>
+
+    <style>
+      :root {
+        --primary: #1e3a8a;
+        --gold: #f59e0b;
+        --bg: #f9fafb;
+        --text: #111827;
+        --card: #ffffff;
+
+        --primary-dark: #93c5fd;
+        --gold-dark: #fbbf24;
+        --bg-dark: #0f172a;
+        --text-dark: #e2e8f0;
+        --card-dark: #1e293b;
+      }
+
+      /* GLOBAL */
+      * {
+        transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        font-size: 16px;
+      }
+
+      body.dark {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+      }
+
+      /* CONTAINER */
+      .container {
+        max-width: 650px;
+        margin: 40px auto;
+        background: var(--card);
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        position: relative;
+      }
+
+      body.dark .container {
+        background: var(--card-dark);
+      }
+
+      /* THEME SWITCH */
+      .theme-switch {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+      }
+
+      .switch {
+        position: relative;
+        width: 46px;
+        height: 24px;
+      }
+
+      .switch input {
+        display: none;
+      }
+
+      .slider {
+        position: absolute;
+        background: #ccc;
+        border-radius: 34px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        cursor: pointer;
+      }
+
+      .slider:before {
+        content: "";
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background: white;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background: var(--gold);
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(22px);
+      }
+
+      /* LOGO */
+      .logo {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .logo img {
+        width: 130px;
+      }
+
+      .logo-text {
+        margin-top: 8px;
+        text-align: center;
+      }
+
+      .logo-text .chinese {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 2px;
+      }
+
+      .logo-text .date {
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      /* DARK MODE */
+      body.dark .logo-text .date {
+        color: #cbd5f5;
+      }
+
+      /* HEADER */
+      .header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin: 0;
+        color: var(--primary);
+      }
+
+      body.dark h1 {
+        color: var(--primary-dark);
+      }
+
+      .header p {
+        color: var(--gold);
+        font-size: 15px;
+      }
+
+      /* SECTION */
+      .section {
+        margin-bottom: 25px;
+      }
+
+      .section h3 {
+        border-left: 4px solid var(--gold);
+        padding-left: 10px;
+        color: var(--primary);
+        font-size: 17px;
+      }
+
+      body.dark .section h3 {
+        color: var(--primary-dark);
+        border-color: var(--gold-dark);
+      }
+
+      /* FORM */
+      label {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 6px 0 14px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 15px;
+      }
+
+      body.dark input,
+      body.dark textarea {
+        background: #334155;
+        border: 1px solid #475569;
+        color: white;
+      }
+
+      /* RADIO */
+      .option-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      input[type="radio"] {
+        transform: scale(1.2);
+        margin-right: 6px;
+      }
+
+      /* TOTAL */
+      .total {
+        text-align: right;
+        font-weight: bold;
+        font-size: 18px;
+        color: var(--primary);
+      }
+
+      body.dark .total {
+        color: var(--primary-dark);
+      }
+
+      /* BUTTON */
+      button {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        color: #1f2937;
+        border: none;
+        border-radius: 14px;
+        font-size: 17px;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+      }
+
+      /* HIDDEN */
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- THEME SWITCH -->
+      <div class="theme-switch">
+        <span>☀️</span>
+        <label class="switch">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider"></span>
+        </label>
+        <span>🌙</span>
+      </div>
+
+      <!-- LOGO -->
+      <div class="logo">
+        <img src="logo_reuni_san_xiao.png" alt="Logo Festival" />
+        <div class="logo-text">
+          <div class="chinese">中秋聯歡</div>
+          <div class="date">22 September 2026</div>
+        </div>
+      </div>
+
+      <div class="header">
+        <h1>Perayaan Mooncake Festival</h1>
+        <p>Formulir pendaftaran</p>
+        <!-- 🌕 -->
+      </div>
+
+      <form id="formDaftar">
+        <div class="section">
+          <h3>Identitas</h3>
+
+          <label>Nama Mandarin</label>
+          <input type="text" id="mandarin" />
+
+          <label>Nama Indonesia</label>
+          <input type="text" id="nama" required />
+
+          <label>Jenis Kelamin</label>
+          <div class="option-group">
+            <label><input type="radio" name="jk" value="Laki-laki" checked /> Laki-laki</label>
+            <label><input type="radio" name="jk" value="Perempuan" /> Perempuan</label>
+          </div>
+
+          <label>Alamat</label>
+          <textarea id="alamat"></textarea>
+
+          <label>Kota</label>
+          <input type="text" id="kota" />
+
+          <label>Kode POS</label>
+          <input type="text" id="kodepos" />
+
+          <label>No WhatsApp</label>
+          <input type="text" id="hp" required />
+
+          <label>Email</label>
+          <input type="email" id="email" />
+        </div>
+
+        <div class="section">
+          <h3>Status</h3>
+          <div class="option-group">
+            <label><input type="radio" name="status" value="Guru" checked /> Guru</label>
+            <label><input type="radio" name="status" value="Murid" /> Murid</label>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Kehadiran Bersama</h3>
+
+          <div class="option-group">
+            <label><input type="radio" name="hadir" value="Sendiri" checked /> Sendiri</label>
+            <label><input type="radio" name="hadir" value="Suami" /> Suami</label>
+            <label><input type="radio" name="hadir" value="Istri" /> Istri</label>
+            <label><input type="radio" name="hadir" value="Saudara" /> Saudara/Suster</label>
+          </div>
+
+          <div id="saudaraSection" class="hidden">
+            <label>Jumlah Saudara</label>
+            <input type="number" id="jumlahSaudara" value="1" min="1" />
+
+            <label>Nama Saudara</label>
+            <input type="text" id="namaSaudara" />
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Biaya</h3>
+          <p style="line-height: 1.6">
+            Biaya pendaftaran Rp 150.000.<br />
+            Sumbangan sukarela dapat ditransfer ke rekening BCA <b>7831-333-131</b><br />
+            Atas nama <b>Tan Tjing Phing</b> atau <b>Mutia Dewi</b>.<br />
+            Harap melakukan konfirmasi ke nomor kontak panitia setelah transfer.<br /><br />
+
+            Tambahan biaya pendamping Rp 150.000/orang.
+          </p>
+
+          <div class="total" id="totalBiaya">Total: Rp 150.000</div>
+        </div>
+
+        <button type="submit">Kirim Pendaftaran</button>
+      </form>
+    </div>
+
+    <script>
+      const biaya = 150000;
+
+      /* HITUNG BIAYA */
+      function hitungTotal() {
+        let hadir = document.querySelector('input[name="hadir"]:checked').value;
+        let total = biaya;
+
+        if (hadir === "Suami" || hadir === "Istri") total += biaya;
+
+        if (hadir === "Saudara") {
+          let j = parseInt(document.getElementById("jumlahSaudara").value) || 1;
+          total += j * biaya;
+        }
+
+        document.getElementById("totalBiaya").innerText = "Total: Rp " + total.toLocaleString("id-ID");
+      }
+
+      /* EVENT */
+      document.querySelectorAll('input[name="hadir"]').forEach((el) => {
+        el.addEventListener("change", () => {
+          let val = document.querySelector('input[name="hadir"]:checked').value;
+          document.getElementById("saudaraSection").classList.toggle("hidden", val !== "Saudara");
+          hitungTotal();
+        });
+      });
+
+      document.getElementById("jumlahSaudara").addEventListener("input", hitungTotal);
+
+      /* SUBMIT */
+      document.getElementById("formDaftar").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        let nama = document.getElementById("nama").value;
+        let mandarin = document.getElementById("mandarin").value;
+        let jk = document.querySelector('input[name="jk"]:checked').value;
+        let status = document.querySelector('input[name="status"]:checked').value;
+        let hadir = document.querySelector('input[name="hadir"]:checked').value;
+        let hp = document.getElementById("hp").value;
+        let kota = document.getElementById("kota").value;
+        let kodepos = document.getElementById("kodepos").value;
+        let jumlah = document.getElementById("jumlahSaudara").value;
+        let namaSaudara = document.getElementById("namaSaudara").value;
+
+        let total = biaya;
+        if (hadir === "Suami" || hadir === "Istri") total += biaya;
+        if (hadir === "Saudara") total += jumlah * biaya;
+
+        await fetch("URL_GOOGLE_SCRIPT_KAMU", {
+          method: "POST",
+          body: JSON.stringify({ nama, mandarin, jk, status, hadir, hp, kota, kodepos, jumlah, namaSaudara, total }),
+        });
+
+        let pesan = encodeURIComponent(
+          `PENDAFTARAN MOONCAKE FESTIVAL
+
+Nama: ${nama}
+Mandarin: ${mandarin}
+JK: ${jk}
+Status: ${status}
+
+Kota: ${kota}
+Kode POS: ${kodepos}
+HP: ${hp}
+
+Hadir: ${hadir}
+Jumlah: ${jumlah}
+Nama Saudara: ${namaSaudara}
+
+Total: Rp ${total.toLocaleString("id-ID")}`,
+        );
+
+        window.location.href = `https://wa.me/628XXXXXXXXXX?text=${pesan}`;
+      });
+
+      /* THEME */
+      const toggle = document.getElementById("themeToggle");
+
+      toggle.addEventListener("change", () => {
+        document.body.classList.toggle("dark");
+        localStorage.setItem("theme", toggle.checked ? "dark" : "light");
+      });
+
+      window.onload = () => {
+        let saved = localStorage.getItem("theme");
+
+        if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.body.classList.add("dark");
+          toggle.checked = true;
+        }
+      };
+    </script>
+  </body>
+</html>
